@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Marco的杂货铺]]></title>
-  <link href="http://marcofeng.com/atom.xml" rel="self"/>
+  <title><![CDATA[类别：ios | Marco的杂货铺]]></title>
+  <link href="http://marcofeng.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://marcofeng.com/"/>
   <updated>2015-09-11T16:45:26+08:00</updated>
   <id>http://marcofeng.com/</id>
