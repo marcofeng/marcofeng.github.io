@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[转]手机号码和价格金额有效性判断"
+title: "[转] 手机号码和价格金额有效性判断"
 date: 2015-09-11 16:29:32 +0800
 comments: true
 categories: iOS 转载

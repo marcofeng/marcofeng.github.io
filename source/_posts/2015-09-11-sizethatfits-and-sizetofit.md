@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "[转]sizeThatFits and sizeToFit"
+title: "[转] sizeThatFits and sizeToFit"
 date: 2015-09-11 17:36:30 +0800
 comments: true
 categories: iOS 转载
