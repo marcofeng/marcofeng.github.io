@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Marco的杂货铺</title>
+  <title>[转] 招聘一个靠谱的 iOS - Marco的杂货铺</title>
   <meta name="author" content="Marco Feng">
 
   
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://marcofeng.com/">
+  <link rel="canonical" href="http://marcofeng.com/blog/2015/09/11/zhao-pin-%5B%3F%5D-ge-kao-pu-de-ios/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -81,15 +81,12 @@
 </header>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2015/09/11/zhao-pin-%5B%3F%5D-ge-kao-pu-de-ios/">[转] 招聘一个靠谱的 iOS</a></h1>
+      <h1 class="entry-title">[转] 招聘一个靠谱的 iOS</h1>
     
     
       <p class="meta">
@@ -108,14 +105,14 @@
 <time datetime="2015-09-11T20:06:28+08:00" pubdate data-updated="true"></time>
         
         
-         | <a href="/blog/2015/09/11/zhao-pin-%5B%3F%5D-ge-kao-pu-de-ios/#comments">Comments</a>
+         | <a href="#comments">Comments</a>
         
       </p>
     
   </header>
 
 
-  <div class="entry-content"><p>近一年内陆续面试了不少人了，从面试者到面试官的转变让我对 iOS 招聘有了更多的感受。经过了前段时间的一大波面试，我们终于找到了志同道合的小伙伴，面试也暂时告一段落了。总结下面试人过程中的感受，你也可以读到我们对简历、算法、性格、iOS 基础、底层知识的看法和一些常问的面试题。</p>
+<div class="entry-content"><p>近一年内陆续面试了不少人了，从面试者到面试官的转变让我对 iOS 招聘有了更多的感受。经过了前段时间的一大波面试，我们终于找到了志同道合的小伙伴，面试也暂时告一段落了。总结下面试人过程中的感受，你也可以读到我们对简历、算法、性格、iOS 基础、底层知识的看法和一些常问的面试题。</p>
 
 <p>&lt;–!more–&gt;</p>
 
@@ -321,76 +318,16 @@
 <p>原文地址：http://blog.sunnyxx.com/2015/07/04/ios-interview/</p>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/09/11/sizethatfits-and-sizetofit/">[转] sizeThatFits and sizeToFit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Posted by <span class="fn">Marco Feng</span></span>
 
-<time datetime="2015-09-11T17:36:30+08:00" pubdate data-updated="true"></time>
-        
-        
-         | <a href="/blog/2015/09/11/sizethatfits-and-sizetofit/#comments">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>sizeThatFits and sizeToFit是UIView的两个方法, 官方文档上说：</p>
-
-<pre><code>- (CGSize)sizeThatFits:(CGSize)size;
-</code></pre>
-
-<p>作用：return ‘best’ size to fit given size. does not actually resize view. Default is return existing view size</p>
-
-<pre><code>- (void)sizeToFit;
-</code></pre>
-
-<p>作用： calls sizeThatFits: with current view bounds and changes bounds size.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/09/11/sizethatfits-and-sizetofit/">阅读全文</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/09/11/ioskai-fa-zhi-asyncsocketshi-yong-jiao-cheng/">[转] iOS开发之AsyncSocket使用教程</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -402,86 +339,55 @@
   
 
 
-<time datetime="2015-09-11T17:22:59+08:00" pubdate data-updated="true"></time>
-        
-        
-         | <a href="/blog/2015/09/11/ioskai-fa-zhi-asyncsocketshi-yong-jiao-cheng/#comments">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>用socket可以实现像QQ那样发送即时消息的功能。客户端和服务端需要建立长连接，在长连接的情况下，发送消息。客户端可以发送心跳包来检测长连接。</p>
-
-<p>在iOS开发中使用socket，一般都是用第三方库AsyncSocket，不得不承认这个库确实很强大。下载地址 <a href="https://github.com/robbiehanson/CocoaAsyncSocket.git">CocoaAsyncSocket</a>
-。</p>
-
-<p>使用AsyncSocket的时候可以做一层封装，根据需求提供几个接口出来。比如：连接、断开连接、发送消息等等。还有接受消息，接受到的消息可以通过通知、代理、block等传出去。</p>
-
-<p>简单介绍一下对AsyncSocket使用.一般来说，一个用户只需要建立一个socket长连接，所以可以用单例类方便使用。</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/09/11/ioskai-fa-zhi-asyncsocketshi-yong-jiao-cheng/">阅读全文</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2015-09-11T20:06:28+08:00" pubdate data-updated="true"></time>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/09/11/shou-ji-hao-ma-he-jie-ge-jin-e-you-xiao-xing-pan-duan/">[转] 手机号码和价格金额有效性判断</a></h1>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
+<span class="categories">
   
+    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/zhuan-zai/'>转载</a>
+  
+</span>
 
 
-<time datetime="2015-09-11T16:29:32+08:00" pubdate data-updated="true"></time>
-        
-        
-         | <a href="/blog/2015/09/11/shou-ji-hao-ma-he-jie-ge-jin-e-you-xiao-xing-pan-duan/#comments">Comments</a>
-        
-      </p>
+    </p>
     
-  </header>
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/09/11/sizethatfits-and-sizetofit/" title="Previous Post: [转] sizeThatFits and sizeToFit">&laquo; [转] sizeThatFits and sizeToFit</a>
+      
+      
+    </p>
+  </footer>
+</article>
 
 
-  <div class="entry-content"><p>在实际开发过程中，经常会遇到些不能让用户随便地输入手机号码，对输入的手机号码的正确判断；有些输入框只能输入数字，不能输入字母或特殊字符；还有些如价格金额之类的就只能输入数字和小数点且小数点后面保留两位。</p>
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-title="[转] 招聘一个靠谱的 iOS"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"marcofeng"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END --></div>
+  </section>
 
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2015/09/11/shou-ji-hao-ma-he-jie-ge-jin-e-you-xiao-xing-pan-duan/">阅读全文</a>
-    </footer>
-  
 
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives/"> Archives </a>
-    
-  </div>
-</div>
 <aside class="sidebar">
   
     <section id="titles">
@@ -600,6 +506,7 @@
 </section>
   
 </aside>
+
 
     </div>
   </div>
