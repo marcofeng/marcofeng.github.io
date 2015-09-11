@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "iOS开发之AsyncSocket使用教程"
+title: "[转]iOS开发之AsyncSocket使用教程"
 date: 2015-09-11 17:22:59 +0800
 comments: true
 categories: iOS 转载
@@ -354,3 +354,5 @@ socketServe.socket.userData = SocketOfflineByServer;
 以上是AsyncSocket的简单使用，在实际开发过程中依然会碰到很多问题，欢迎加我的微信公众号iOS开发：iOSDevTip，一起讨论AsyncSocket中遇到的问题。
 
 AsyncSocketDemo下载地址：[AsyncSocketDemo](https://github.com/worldligang/AsyncSocketDemo.git)
+
+原文地址：http://www.superqq.com/blog/2015/04/03/ioskai-fa-zhi-asyncsocketshi-yong-jiao-cheng/

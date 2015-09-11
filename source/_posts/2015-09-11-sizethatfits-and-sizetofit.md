@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "sizeThatFits and sizeToFit"
+title: "[转]sizeThatFits and sizeToFit"
 date: 2015-09-11 17:36:30 +0800
 comments: true
 categories: iOS 转载
@@ -47,3 +47,5 @@ example:
     [self.view addSubview:view];
 }
 ~~~
+
+原文地址：http://liuxing8807.blog.163.com/blog/static/9703530520134381526554/
