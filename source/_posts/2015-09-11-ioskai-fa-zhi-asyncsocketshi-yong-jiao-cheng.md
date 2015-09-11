@@ -14,6 +14,8 @@ categories: iOS 转载
 
 简单介绍一下对AsyncSocket使用.一般来说，一个用户只需要建立一个socket长连接，所以可以用单例类方便使用。
 
+<!--more-->
+
 定义单例类：LGSocketServe
 
 LGSocketServe.h
