@@ -4,7 +4,7 @@
   <title><![CDATA[Marco的杂货铺]]></title>
   <link href="http://marcofeng.com/atom.xml" rel="self"/>
   <link href="http://marcofeng.com/"/>
-  <updated>2015-09-11T17:39:36+08:00</updated>
+  <updated>2015-09-11T18:32:36+08:00</updated>
   <id>http://marcofeng.com/</id>
   <author>
     <name><![CDATA[Marco Feng]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[sizeThatFits and sizeToFit]]></title>
+    <title type="html"><![CDATA[[转]sizeThatFits and sizeToFit]]></title>
     <link href="http://marcofeng.com/blog/2015/09/11/sizethatfits-and-sizetofit/"/>
     <updated>2015-09-11T17:36:30+08:00</updated>
     <id>http://marcofeng.com/blog/2015/09/11/sizethatfits-and-sizetofit</id>
@@ -57,11 +57,13 @@
     [self.view addSubview:view];
 }
 </code></pre>
+
+<p>原文地址：http://liuxing8807.blog.163.com/blog/static/9703530520134381526554/</p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[iOS开发之AsyncSocket使用教程]]></title>
+    <title type="html"><![CDATA[[转]iOS开发之AsyncSocket使用教程]]></title>
     <link href="http://marcofeng.com/blog/2015/09/11/ioskai-fa-zhi-asyncsocketshi-yong-jiao-cheng/"/>
     <updated>2015-09-11T17:22:59+08:00</updated>
     <id>http://marcofeng.com/blog/2015/09/11/ioskai-fa-zhi-asyncsocketshi-yong-jiao-cheng</id>
@@ -399,11 +401,13 @@ socketServe.socket.userData = SocketOfflineByServer;
 <p>以上是AsyncSocket的简单使用，在实际开发过程中依然会碰到很多问题，欢迎加我的微信公众号iOS开发：iOSDevTip，一起讨论AsyncSocket中遇到的问题。</p>
 
 <p>AsyncSocketDemo下载地址：<a href="https://github.com/worldligang/AsyncSocketDemo.git">AsyncSocketDemo</a></p>
+
+<p>原文地址：http://www.superqq.com/blog/2015/04/03/ioskai-fa-zhi-asyncsocketshi-yong-jiao-cheng/</p>
 ]]></content>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[手机号码和价格金额有效性判断]]></title>
+    <title type="html"><![CDATA[[转]手机号码和价格金额有效性判断]]></title>
     <link href="http://marcofeng.com/blog/2015/09/11/shou-ji-hao-ma-he-jie-ge-jin-e-you-xiao-xing-pan-duan/"/>
     <updated>2015-09-11T16:29:32+08:00</updated>
     <id>http://marcofeng.com/blog/2015/09/11/shou-ji-hao-ma-he-jie-ge-jin-e-you-xiao-xing-pan-duan</id>
@@ -551,6 +555,9 @@ socketServe.socket.userData = SocketOfflineByServer;
     return YES;  
 }
 </code></pre>
+
+<p>原文地址：http://blog.csdn.net/nogodoss/article/details/8147403</p>
+
 ]]></content>
   </entry>
   
