@@ -35,6 +35,7 @@ code_dir: downloads/code
 category_dir: blog/categories
 category_title_prefix: "类别："
 markdown: kramdown
+mathjax: true
 kramdown:
   use_coderay: true
   coderay:
