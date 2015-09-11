@@ -153,8 +153,18 @@ ERR
     # Returns string
     #
     def category_links(categories)
-      categories.sort.map { |c| category_link c }.join(', ')
-    end
+    if categories != nil     # Added this line
+      categories = categories.sort!.map { |c| category_link c }
+      case categories.length
+      when 0
+        ""
+      when 1
+        categories[0].to_s
+      else
+        "#{categories[0...-1].join(', ')}, #{categories[-1]}"
+      end
+    end                      # Added this line
+  end
 
     # Outputs a single category as an <a> link.
     #
