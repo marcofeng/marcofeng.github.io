@@ -1,7 +1,7 @@
 ---
 layout: post
-title: " iOS开发中手机号码和价格金额有效性判断"
-date: 2015-09-11 16:15:09 +0800
+title: "手机号码和价格金额有效性判断"
+date: 2015-09-11 16:29:32 +0800
 comments: true
 categories: 
 ---
@@ -66,7 +66,6 @@ categories:
     }  
 }  
 
-[html] view plaincopy 
 //////// 特殊字符的限制输入，价格金额的有效性判断  
 #define myDotNumbers     @"0123456789.\n"  
 #define myNumbers        @"+0123456789\n"  
@@ -150,4 +149,4 @@ categories:
     return YES;  
 }
 ~~~
-{:lang="objc"}
+{lang:objc}
