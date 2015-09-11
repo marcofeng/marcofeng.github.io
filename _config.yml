@@ -35,6 +35,11 @@ code_dir: downloads/code
 category_dir: blog/categories
 category_title_prefix: "类别："
 markdown: kramdown
+kramdown:
+  use_coderay: true
+  coderay:
+    coderay_line_numbers: nil
+    coderay_css: class
 
 highlighter: pygments # default python pygments have been replaced by pygments.rb
 
