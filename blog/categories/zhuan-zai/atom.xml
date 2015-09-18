@@ -4,7 +4,7 @@
   <title><![CDATA[类别：转载 | Marco的杂货铺]]></title>
   <link href="http://marcofeng.com/blog/categories/zhuan-zai/atom.xml" rel="self"/>
   <link href="http://marcofeng.com/"/>
-  <updated>2015-09-18T16:00:40+08:00</updated>
+  <updated>2015-09-18T17:48:00+08:00</updated>
   <id>http://marcofeng.com/</id>
   <author>
     <name><![CDATA[Marco Feng]]></name>
@@ -468,13 +468,13 @@ sv31.backgroundColor = [UIColor redColor];
 
 <p>这里所用的技巧就是 使用空白的占位view来填充我们目标view的旁边 这点通过图上的空白标注可以看出来</p>
 
-<p>小结</p>
+<h1 id="section-3">小结</h1>
 
 <p>通过以上5个案例 我觉得已经把Masonry的常用功能介绍得差不多了 以上五个例子的代码可以在这里找到 如果你觉得意犹未尽呢 请下载官方的demo来学习</p>
 
 <p>总而言之 Masonry是一个非常优秀的autolayout库 能够节省大量的开发和学习时间 尤其适合我这种纯代码的iOSer 在iPhone6发布后引发的适配潮中 Masonry一定可以助你一臂之力 :)</p>
 
-<p>原味地址：(http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/)
+<p>原文地址：[http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/]
 作者：里脊串</p>
 ]]></content>
   </entry>
