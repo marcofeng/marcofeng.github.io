@@ -10,8 +10,7 @@
 
   
   <meta name="description" content="设置导航栏返回按钮的方法:
-导航栏的返回按钮backBarButtonItem需要设置在前一个页面，属于上一层的navigationItem。 e.g. ~~~ (void)setBackButtonTitle:(NSString *)title
-{ if (self. &hellip;">
+导航栏的返回按钮backBarButtonItem需要设置在前一个页面，属于上一层的navigationItem。 ">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -120,46 +119,12 @@
   <div class="entry-content"><p>设置导航栏返回按钮的方法:
 导航栏的返回按钮backBarButtonItem需要设置在前一个页面，属于上一层的navigationItem。</p>
 
-<p>e.g.</p>
-
-<p>~~~</p>
-
-<ul>
-  <li>
-    <p>(void)setBackButtonTitle:(NSString *)title
-{
-  if (self.navigationController == nil || title.length == 0) {
-      return;
-  }</p>
-
-    <p>UIBarButtonItem *barButton = [[UIBarButtonItem alloc] init];
-  barButton.title = title;
-  UIColor *titleColor = [self _getButtonTextColor];
-  [barButton setTitleTextAttributes:@{NSForegroundColorAttributeName: titleColor} forState:UIControlStateNormal];
-  //设置字体颜色</p>
-
-    <p>if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@”7.1”)) {
-      UIImage *backButtonImg = [[self _getBackImage] resizableImageWithCapInsets:UIEdgeInsetsMake(1.f, 7.f, 1.f, 1.f)];
-      [barButton setBackButtonBackgroundImage:backButtonImg forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
-      //设置按钮背景图（“&lt;”），内间距
-  }</p>
-
-    <p>// backBarButtonItem需要设置在前一个页面！！！
-  NSArray *viewControllers = self.navigationController.viewControllers;
-  if (viewControllers.count &lt; 2) {
-      UIViewController *vc = viewControllers[0];
-      vc.navigationItem.backBarButtonItem = barButton;
-  } else {
-      UIViewController *vc = viewControllers[viewControllers.count-2];
-      vc.navigationItem.backBarButtonItem = barButton;
-  }
-}</p>
-  </li>
-</ul>
-
-<p>~~~</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/09/18/she-zhi-fan-hui-an-niu/">阅读全文</a>
+    </footer>
   
 
 
