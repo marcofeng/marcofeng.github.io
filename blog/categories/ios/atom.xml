@@ -4,7 +4,7 @@
   <title><![CDATA[类别：ios | Marco的杂货铺]]></title>
   <link href="http://marcofeng.com/blog/categories/ios/atom.xml" rel="self"/>
   <link href="http://marcofeng.com/"/>
-  <updated>2015-09-18T11:21:57+08:00</updated>
+  <updated>2015-09-18T16:00:40+08:00</updated>
   <id>http://marcofeng.com/</id>
   <author>
     <name><![CDATA[Marco Feng]]></name>
@@ -12,6 +12,472 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[转] Masonry使用]]></title>
+    <link href="http://marcofeng.com/blog/2015/09/18/masonryshi-yong/"/>
+    <updated>2015-09-18T14:42:09+08:00</updated>
+    <id>http://marcofeng.com/blog/2015/09/18/masonryshi-yong</id>
+    <content type="html"><![CDATA[<p>Masonry介绍与使用实践(快速上手Autolayout)</p>
+
+<h1 id="section">前言</h1>
+
+<p>1</p>
+
+<pre><code>MagicNumber -&gt; autoresizingMask -&gt; autolayout
+</code></pre>
+
+<p>以上是纯手写代码所经历的关于页面布局的三个时期</p>
+
+<p>在iphone1-iphone3gs时代 window的size固定为(320,480) 我们只需要简单计算一下相对位置就好了</p>
+
+<p>在iphone4-iphone4s时代 苹果推出了retina屏 但是给了码农们非常大的福利:window的size不变</p>
+
+<p>在iphone5-iphone5s时代 window的size变了(320,568) 这时autoresizingMask派上了用场(为啥这时候不用Autolayout? 因为还要支持ios5呗) 简单的适配一下即可</p>
+
+<p>在iphone6+时代 window的width也发生了变化(相对5和5s的屏幕比例没有变化) 终于是时候抛弃autoresizingMask改用autolayout了(不用支持ios5了 相对于屏幕适配的多样性来说autoresizingMask也已经过时了)</p>
+
+<p>那如何快速的上手autolayout呢? 说实话 当年ios6推出的同时新增了autolayout的特性 我看了一下官方文档和demo 就立马抛弃到一边了 因为实在过于的繁琐和啰嗦(有过经验的朋友肯定有同感)</p>
+
+<p>直到iphone6发布之后 我知道使用autolayout势在必行了 这时想起了以前在浏览Github看到过的一个第三方库Masonry 在花了几个小时的研究使用后 我就将autolayout掌握了(重点是我并没有学习任何的官方文档或者其他的关于autolayout的知识) 这就是我为什么要写下这篇文章来推荐它的原因
+<!--more--></p>
+
+<h1 id="section-1">介绍</h1>
+
+<p>Masonry 源码</p>
+
+<p>Masonry是一个轻量级的布局框架 拥有自己的描述语法 采用更优雅的链式语法封装自动布局 简洁明了 并具有高可读性 而且同时支持 iOS 和 Max OS X</p>
+
+<p>我们先来看一段官方的sample code来认识一下Masonry</p>
+
+<pre><code>[view1 mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.edges.equalTo(superview).with.insets(padding);
+}];
+</code></pre>
+
+<p>看到block里面的那句话: make edges equalTo superview with insets
+通过链式的自然语言 就把view1给autolayout好了 是不是简单易懂?</p>
+
+<h1 id="section-2">使用</h1>
+
+<p>看一下Masonry支持哪一些属性</p>
+
+<pre><code>@property (nonatomic, strong, readonly) MASConstraint *left;
+@property (nonatomic, strong, readonly) MASConstraint *top;
+@property (nonatomic, strong, readonly) MASConstraint *right;
+@property (nonatomic, strong, readonly) MASConstraint *bottom;
+@property (nonatomic, strong, readonly) MASConstraint *leading;
+@property (nonatomic, strong, readonly) MASConstraint *trailing;
+@property (nonatomic, strong, readonly) MASConstraint *width;
+@property (nonatomic, strong, readonly) MASConstraint *height;
+@property (nonatomic, strong, readonly) MASConstraint *centerX;
+@property (nonatomic, strong, readonly) MASConstraint *centerY;
+@property (nonatomic, strong, readonly) MASConstraint *baseline;
+</code></pre>
+
+<p>这些属性与NSLayoutAttrubute的对照表如下</p>
+
+<pre><code>Masonry NSAutoLayout    说明
+left    NSLayoutAttributeLeft   左侧
+top NSLayoutAttributeTop    上侧
+right   NSLayoutAttributeRight  右侧
+bottom  NSLayoutAttributeBottom 下侧
+leading NSLayoutAttributeLeading    首部
+trailing    NSLayoutAttributeTrailing   尾部
+width   NSLayoutAttributeWidth  宽
+height  NSLayoutAttributeHeight 高
+centerX NSLayoutAttributeCenterX    横向中点
+centerY NSLayoutAttributeCenterY    纵向中点
+baseline    NSLayoutAttributeBaseline   文本基线
+</code></pre>
+
+<p>其中leading与left trailing与right 在正常情况下是等价的 但是当一些布局是从右至左时(比如阿拉伯文?没有类似的经验) 则会对调 换句话说就是基本可以不理不用 用left和right就好了</p>
+
+<p>在ios8发布后 又新增了一堆奇奇怪怪的属性(有兴趣的朋友可以去瞅瞅) Masonry暂时还不支持(不过你要支持ios6,ios7 就没必要去管那么多了)</p>
+
+<p>下面进入正题(为了方便 我们测试的superView都是一个size为(300,300)的UIView)</p>
+
+<p>下面 通过一些简单的实例来简单介绍如何轻松愉快的使用Masonry:</p>
+
+<ol>
+  <li>[基础] 居中显示一个view</li>
+</ol>
+
+<pre><code>- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
+    
+    UIView *sv = [UIView new];
+    [sv showPlaceHolder];
+    sv.backgroundColor = [UIColor blackColor];
+    [self.view addSubview:sv];
+    [sv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.size.mas_equalTo(CGSizeMake(300, 300));
+    }];
+    
+}
+</code></pre>
+
+<p>使用我之间写的MMPlaceHolder 可以看到superview已经按照我们预期居中并且设置成了适当的大小</p>
+
+<p><img src="/images/masonry/1.png" alt="1" /></p>
+
+<p>那么先看看这几行代码</p>
+
+<pre><code>//从此以后基本可以抛弃CGRectMake了
+UIView *sv = [UIView new];
+
+//在做autoLayout之前 一定要先将view添加到superview上 否则会报错
+[self.view addSubview:sv];
+
+//mas_makeConstraints就是Masonry的autolayout添加函数 将所需的约束添加到block中行了
+[sv mas_makeConstraints:^(MASConstraintMaker *make) {
+
+    //将sv居中(很容易理解吧?)
+    make.center.equalTo(self.view);
+    
+    //将size设置成(300,300)
+    make.size.mas_equalTo(CGSizeMake(300, 300));
+}];
+</code></pre>
+
+<p>这里有两个问题要分解一下</p>
+
+<p>首先在Masonry中能够添加autolayout约束有三个函数</p>
+
+<pre><code>- (NSArray *)mas_makeConstraints:(void(^)(MASConstraintMaker *make))block;
+- (NSArray *)mas_updateConstraints:(void(^)(MASConstraintMaker *make))block;
+- (NSArray *)mas_remakeConstraints:(void(^)(MASConstraintMaker *make))block;
+
+/*
+    mas_makeConstraints 只负责新增约束 Autolayout不能同时存在两条针对于同一对象的约束 否则会报错 
+    mas_updateConstraints 针对上面的情况 会更新在block中出现的约束 不会导致出现两个相同约束的情况
+    mas_remakeConstraints 则会清除之前的所有约束 仅保留最新的约束
+    
+    三种函数善加利用 就可以应对各种情况了
+*/
+</code></pre>
+
+<p>其次 equalTo 和 mas_equalTo的区别在哪里呢? 其实 mas_equalTo是一个MACRO</p>
+
+<pre><code>#define mas_equalTo(...)                 equalTo(MASBoxValue((__VA_ARGS__)))
+#define mas_greaterThanOrEqualTo(...)    greaterThanOrEqualTo(MASBoxValue((__VA_ARGS__)))
+#define mas_lessThanOrEqualTo(...)       lessThanOrEqualTo(MASBoxValue((__VA_ARGS__)))
+
+#define mas_offset(...)                  valueOffset(MASBoxValue((__VA_ARGS__)))
+</code></pre>
+
+<p>可以看到 mas_equalTo只是对其参数进行了一个BOX操作(装箱) MASBoxValue的定义具体可以看看源代码 太长就不贴出来了</p>
+
+<p>所支持的类型 除了NSNumber支持的那些数值类型之外 就只支持CGPoint CGSize UIEdgeInsets</p>
+
+<p>介绍完这几个问题 我们就继续往下了 PS:刚才定义的sv会成为我们接下来所有sample的superView</p>
+
+<ol>
+  <li>[初级] 让一个view略小于其superView(边距为10)</li>
+</ol>
+
+<pre><code>UIView *sv1 = [UIView new];
+[sv1 showPlaceHolder];
+sv1.backgroundColor = [UIColor redColor];
+[sv addSubview:sv1];
+[sv1 mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.edges.equalTo(sv).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));
+    
+    /* 等价于
+    make.top.equalTo(sv).with.offset(10);
+    make.left.equalTo(sv).with.offset(10);
+    make.bottom.equalTo(sv).with.offset(-10);
+    make.right.equalTo(sv).with.offset(-10);
+    */
+    
+    /* 也等价于
+    make.top.left.bottom.and.right.equalTo(sv).with.insets(UIEdgeInsetsMake(10, 10, 10, 10));
+    */
+}];
+</code></pre>
+
+<p><img src="/images/masonry/2.png" alt="2" /></p>
+
+<p>可以看到 edges 其实就是top,left,bottom,right的一个简化 分开写也可以 一句话更省事</p>
+
+<p>那么为什么bottom和right里的offset是负数呢? 因为这里计算的是绝对的数值 计算的bottom需要小于sv的底部高度 所以要-10 同理用于right</p>
+
+<p>这里有意思的地方是and和with 其实这两个函数什么事情都没做</p>
+
+<pre><code>- (MASConstraint *)with {
+    return self;
+}
+
+- (MASConstraint *)and {
+    return self;
+}
+</code></pre>
+
+<p>但是用在这种链式语法中 就非常的巧妙和易懂 不得不佩服作者的心思(虽然我现在基本都会省略)</p>
+
+<ol>
+  <li>[初级] 让两个高度为150的view垂直居中且等宽且等间隔排列 间隔为10(自动计算其宽度)</li>
+</ol>
+
+<pre><code>int padding1 = 10;
+
+[sv2 mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.centerY.mas_equalTo(sv.mas_centerY);
+    make.left.equalTo(sv.mas_left).with.offset(padding1);
+    make.right.equalTo(sv3.mas_left).with.offset(-padding1);
+    make.height.mas_equalTo(@150);
+    make.width.equalTo(sv3);
+}];
+
+[sv3 mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.centerY.mas_equalTo(sv.mas_centerY);
+    make.left.equalTo(sv2.mas_right).with.offset(padding1);
+    make.right.equalTo(sv.mas_right).with.offset(-padding1);
+    make.height.mas_equalTo(@150);
+    make.width.equalTo(sv2);
+}];
+</code></pre>
+
+<p><img src="/images/masonry/3.png" alt="3" /></p>
+
+<p>这里我们在两个子view之间互相设置的约束 可以看到他们的宽度在约束下自动的被计算出来了</p>
+
+<ol>
+  <li>[中级] 在UIScrollView顺序排列一些view并自动计算contentSize</li>
+</ol>
+
+<pre><code>UIScrollView *scrollView = [UIScrollView new];
+scrollView.backgroundColor = [UIColor whiteColor];
+[sv addSubview:scrollView];
+[scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.edges.equalTo(sv).with.insets(UIEdgeInsetsMake(5,5,5,5));
+}];
+
+UIView *container = [UIView new];
+[scrollView addSubview:container];
+[container mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.edges.equalTo(scrollView);
+    make.width.equalTo(scrollView);
+}];
+
+int count = 10;
+
+UIView *lastView = nil;
+
+for ( int i = 1 ; i &lt;= count ; ++i )
+{
+    UIView *subv = [UIView new];
+    [container addSubview:subv];
+    subv.backgroundColor = [UIColor colorWithHue:( arc4random() % 256 / 256.0 )
+                                      saturation:( arc4random() % 128 / 256.0 ) + 0.5
+                                      brightness:( arc4random() % 128 / 256.0 ) + 0.5
+                                           alpha:1];
+    
+    [subv mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(container);
+        make.height.mas_equalTo(@(20*i));
+        
+        if ( lastView )
+        {
+            make.top.mas_equalTo(lastView.mas_bottom);
+        }
+        else
+        {
+            make.top.mas_equalTo(container.mas_top);
+        }
+    }];
+    
+    lastView = subv;
+}
+
+
+[container mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.bottom.equalTo(lastView.mas_bottom);
+}];
+</code></pre>
+
+<p><img src="/images/masonry/4.png" alt="4" /></p>
+
+<p>从scrollView的scrollIndicator可以看出 scrollView的内部已如我们所想排列好了</p>
+
+<p>这里的关键就在于container这个view起到了一个中间层的作用 能够自动的计算uiscrollView的contentSize</p>
+
+<ol>
+  <li>[高级] 横向或者纵向等间隙的排列一组view</li>
+</ol>
+
+<p>很遗憾 autoLayout并没有直接提供等间隙排列的方法(Masonry的官方demo中也没有对应的案例) 但是参考案例3 我们可以通过一个小技巧来实现这个目的 为此我写了一个Category</p>
+
+<pre><code>@implementation UIView(Masonry_LJC)
+
+- (void) distributeSpacingHorizontallyWith:(NSArray*)views
+{
+    NSMutableArray *spaces = [NSMutableArray arrayWithCapacity:views.count+1];
+    
+    for ( int i = 0 ; i &lt; views.count+1 ; ++i )
+    {
+        UIView *v = [UIView new];
+        [spaces addObject:v];
+        [self addSubview:v];
+        
+        [v mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(v.mas_height);
+        }];
+    }    
+    
+    UIView *v0 = spaces[0];
+    
+    [v0 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.mas_left);
+        make.centerY.equalTo(((UIView*)views[0]).mas_centerY);
+    }];
+    
+    UIView *lastSpace = v0;
+    for ( int i = 0 ; i &lt; views.count; ++i )
+    {
+        UIView *obj = views[i];
+        UIView *space = spaces[i+1];
+        
+        [obj mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(lastSpace.mas_right);
+        }];
+        
+        [space mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(obj.mas_right);
+            make.centerY.equalTo(obj.mas_centerY);
+            make.width.equalTo(v0);
+        }];
+        
+        lastSpace = space;
+    }
+    
+    [lastSpace mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.equalTo(self.mas_right);
+    }];
+    
+}
+
+- (void) distributeSpacingVerticallyWith:(NSArray*)views
+{
+    NSMutableArray *spaces = [NSMutableArray arrayWithCapacity:views.count+1];
+    
+    for ( int i = 0 ; i &lt; views.count+1 ; ++i )
+    {
+        UIView *v = [UIView new];
+        [spaces addObject:v];
+        [self addSubview:v];
+        
+        [v mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.width.equalTo(v.mas_height);
+        }];
+    }
+    
+    
+    UIView *v0 = spaces[0];
+    
+    [v0 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.equalTo(self.mas_top);
+        make.centerX.equalTo(((UIView*)views[0]).mas_centerX);
+    }];
+    
+    UIView *lastSpace = v0;
+    for ( int i = 0 ; i &lt; views.count; ++i )
+    {
+        UIView *obj = views[i];
+        UIView *space = spaces[i+1];
+        
+        [obj mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(lastSpace.mas_bottom);
+        }];
+        
+        [space mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(obj.mas_bottom);
+            make.centerX.equalTo(obj.mas_centerX);
+            make.height.equalTo(v0);
+        }];
+        
+        lastSpace = space;
+    }
+    
+    [lastSpace mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.mas_bottom);
+    }];
+
+}
+
+@end
+</code></pre>
+
+<p><img src="/images/masonry/5.png" alt="5" /></p>
+
+<p>简单的来测试一下</p>
+
+<pre><code>UIView *sv11 = [UIView new];
+UIView *sv12 = [UIView new];
+UIView *sv13 = [UIView new];
+UIView *sv21 = [UIView new];
+UIView *sv31 = [UIView new];
+
+sv11.backgroundColor = [UIColor redColor];
+sv12.backgroundColor = [UIColor redColor];
+sv13.backgroundColor = [UIColor redColor];
+sv21.backgroundColor = [UIColor redColor];
+sv31.backgroundColor = [UIColor redColor];
+
+[sv addSubview:sv11];
+[sv addSubview:sv12];
+[sv addSubview:sv13];
+[sv addSubview:sv21];
+[sv addSubview:sv31];
+
+//给予不同的大小 测试效果
+
+[sv11 mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.centerY.equalTo(@[sv12,sv13]);
+    make.centerX.equalTo(@[sv21,sv31]);
+    make.size.mas_equalTo(CGSizeMake(40, 40));
+}];
+
+[sv12 mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.size.mas_equalTo(CGSizeMake(70, 20));
+}];
+
+[sv13 mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.size.mas_equalTo(CGSizeMake(50, 50));
+}];
+
+[sv21 mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.size.mas_equalTo(CGSizeMake(50, 20));
+}];
+
+[sv31 mas_makeConstraints:^(MASConstraintMaker *make) {
+    make.size.mas_equalTo(CGSizeMake(40, 60));
+}];
+
+[sv distributeSpacingHorizontallyWith:@[sv11,sv12,sv13]];
+[sv distributeSpacingVerticallyWith:@[sv11,sv21,sv31]];
+
+[sv showPlaceHolderWithAllSubviews];
+[sv hidePlaceHolder];
+</code></pre>
+
+<p>perfect! 简洁明了的达到了我们所要的效果</p>
+
+<p>这里所用的技巧就是 使用空白的占位view来填充我们目标view的旁边 这点通过图上的空白标注可以看出来</p>
+
+<p>小结</p>
+
+<p>通过以上5个案例 我觉得已经把Masonry的常用功能介绍得差不多了 以上五个例子的代码可以在这里找到 如果你觉得意犹未尽呢 请下载官方的demo来学习</p>
+
+<p>总而言之 Masonry是一个非常优秀的autolayout库 能够节省大量的开发和学习时间 尤其适合我这种纯代码的iOSer 在iPhone6发布后引发的适配潮中 Masonry一定可以助你一臂之力 :)</p>
+
+<p>原味地址：(http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/)
+作者：里脊串</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[设置返回按钮]]></title>
@@ -661,161 +1127,6 @@ socketServe.socket.userData = SocketOfflineByServer;
 <p>AsyncSocketDemo下载地址：<a href="https://github.com/worldligang/AsyncSocketDemo.git">AsyncSocketDemo</a></p>
 
 <p>原文地址：http://www.superqq.com/blog/2015/04/03/ioskai-fa-zhi-asyncsocketshi-yong-jiao-cheng/</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[转] 手机号码和价格金额有效性判断]]></title>
-    <link href="http://marcofeng.com/blog/2015/09/11/shou-ji-hao-ma-he-jie-ge-jin-e-you-xiao-xing-pan-duan/"/>
-    <updated>2015-09-11T16:29:32+08:00</updated>
-    <id>http://marcofeng.com/blog/2015/09/11/shou-ji-hao-ma-he-jie-ge-jin-e-you-xiao-xing-pan-duan</id>
-    <content type="html"><![CDATA[<p>在实际开发过程中，经常会遇到些不能让用户随便地输入手机号码，对输入的手机号码的正确判断；有些输入框只能输入数字，不能输入字母或特殊字符；还有些如价格金额之类的就只能输入数字和小数点且小数点后面保留两位。</p>
-
-<!--more-->
-<pre><code>// 手机号码的有效性判断  
-  
-- (BOOL)isMobileNumber:(NSString *)mobileNum  
-{  
-    /**  
-     * 手机号码  
-     * 移动：134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188  
-     * 联通：130,131,132,152,155,156,185,186  
-     * 电信：133,1349,153,180,189  
-     */  
-    NSString * MOBILE = @"^1(3[0-9]|5[0-35-9]|8[025-9])\\d{8}$";  
-    /**  
-     10         * 中国移动：China Mobile  
-     11         * 134[0-8],135,136,137,138,139,150,151,157,158,159,182,187,188  
-     12         */  
-    NSString * CM = @"^1(34[0-8]|(3[5-9]|5[017-9]|8[278])\\d)\\d{7}$";  
-    /**  
-     15         * 中国联通：China Unicom  
-     16         * 130,131,132,152,155,156,185,186  
-     17         */  
-    NSString * CU = @"^1(3[0-2]|5[256]|8[56])\\d{8}$";  
-    /**  
-     20         * 中国电信：China Telecom  
-     21         * 133,1349,153,180,189  
-     22         */  
-    NSString * CT = @"^1((33|53|8[09])[0-9]|349)\\d{7}$";  
-    /**  
-     25         * 大陆地区固话及小灵通  
-     26         * 区号：010,020,021,022,023,024,025,027,028,029  
-     27         * 号码：七位或八位  
-     28         */  
-    // NSString * PHS = @"^0(10|2[0-5789]|\\d{3})\\d{7,8}$";  
-    /**  
-     29         * 国际长途中国区(+86)  
-     30         * 区号：+86  
-     31         * 号码：十一位  
-     32         */  
-     NSString * IPH = @"^\\+861(3|5|8)\\d{9}$";  
-      
-    NSPredicate *regextestmobile = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", MOBILE];  
-    NSPredicate *regextestcm = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CM];  
-    NSPredicate *regextestcu = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CU];  
-    NSPredicate *regextestct = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", CT];  
-    NSPredicate *regextestiph = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", IPH];  
-    if (([regextestmobile evaluateWithObject:mobileNum] == YES)  
-        || ([regextestcm evaluateWithObject:mobileNum] == YES)  
-        || ([regextestct evaluateWithObject:mobileNum] == YES)  
-        || ([regextestcu evaluateWithObject:mobileNum] == YES)  
-        || ([regextestiph evaluateWithObject:mobileNum] == YES))  
-    {  
-        return YES;  
-    }  
-    else  
-    {  
-        return NO;  
-    }  
-}  
-
-//////// 特殊字符的限制输入，价格金额的有效性判断  
-#define myDotNumbers     @"0123456789.\n"  
-#define myNumbers        @"+0123456789\n"  
-  
--(void) createTextFiled {  
-      
-    textfield1_ = [[UITextField alloc] initWithFrame:CGRectMake(0, 0, 110, 20)];  
-    textfield1_.delegate = self;  
-    textfield1_.text=@"";  
-    textfield1_.keyboardType=UIKeyboardTypePhonePad;  
-    textfield1_.textColor=[UIColor redColor];  
-    textfield1_.backgroundColor=[UIColor whiteColor];  
-    [self.view addSubview:textfield1_];  
-    [textfield1_ release];  
-      
-    textfield2_ = [[UITextField alloc] initWithFrame:CGRectMake(110, 0, 80, 20)];  
-    textfield2_.delegate = self;  
-    textfield2_.text=@"11";  
-    [self.view addSubview:textfield2_];  
-    [textfield2_ release];  
-      
-    textfield3_ = [[UITextField alloc] initWithFrame:CGRectMake(200, 0, 100, 20)];  
-    textfield3_.delegate = self;  
-    textfield3_.text=@"22";  
-    [self.view addSubview:textfield3_];  
-    [textfield3_ release];  
-}  
-  
--(void)showMyMessage:(NSString*)aInfo {  
-      
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"  
-                                                        message:aInfo  
-                                                       delegate:self  
-                                              cancelButtonTitle:@"确定"  
-                                              otherButtonTitles:nil, nil];  
-    [alertView show];  
-    [alertView release];  
-}  
-  
-  
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {  
-    NSCharacterSet *cs;  
-    if ([textField isEqual:textfield1_]) {  
-        cs = [[NSCharacterSet characterSetWithCharactersInString:myNumbers] invertedSet];  
-        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];  
-        BOOL basicTest = [string isEqualToString:filtered];  
-        if (!basicTest) {  
-            [self showMyMessage:@"只能输入数字"];  
-            return NO;  
-        }  
-    }  
-    else if ([textField isEqual:textfield2_]) {  
-        cs = [[NSCharacterSet characterSetWithCharactersInString:myNumbers] invertedSet];  
-        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];  
-        BOOL basicTest = [string isEqualToString:filtered];  
-        if (!basicTest) {  
-            [self showMyMessage:@"只能输入数字"];  
-            return NO;  
-        }  
-    }  
-    else if ([textField isEqual:textfield3_]) {  
-        NSUInteger nDotLoc = [textField.text rangeOfString:@"."].location;  
-        if (NSNotFound == nDotLoc &amp;&amp; 0 != range.location) {  
-            cs = [[NSCharacterSet characterSetWithCharactersInString:myDotNumbers] invertedSet];  
-        }  
-        else {  
-            cs = [[NSCharacterSet characterSetWithCharactersInString:myNumbers] invertedSet];  
-        }  
-        NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];  
-        BOOL basicTest = [string isEqualToString:filtered];  
-        if (!basicTest) {  
-              
-            [self showMyMessage:@"只能输入数字和小数点"];  
-            return NO;  
-        }  
-        if (NSNotFound != nDotLoc &amp;&amp; range.location &gt; nDotLoc + 3) {  
-            [self showMyMessage:@"小数点后最多三位"];  
-            return NO;  
-        }  
-    }  
-    return YES;  
-}
-</code></pre>
-
-<p>原文地址：http://blog.csdn.net/nogodoss/article/details/8147403</p>
-
 ]]></content>
   </entry>
   
