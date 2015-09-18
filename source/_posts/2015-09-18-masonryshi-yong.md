@@ -459,11 +459,11 @@ perfect! 简洁明了的达到了我们所要的效果
 
 这里所用的技巧就是 使用空白的占位view来填充我们目标view的旁边 这点通过图上的空白标注可以看出来
 
-小结
+#小结
 
 通过以上5个案例 我觉得已经把Masonry的常用功能介绍得差不多了 以上五个例子的代码可以在这里找到 如果你觉得意犹未尽呢 请下载官方的demo来学习
 
 总而言之 Masonry是一个非常优秀的autolayout库 能够节省大量的开发和学习时间 尤其适合我这种纯代码的iOSer 在iPhone6发布后引发的适配潮中 Masonry一定可以助你一臂之力 :)
 
-原味地址：(http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/)
+原文地址：[http://adad184.com/2014/09/28/use-masonry-to-quick-solve-autolayout/]
 作者：里脊串
