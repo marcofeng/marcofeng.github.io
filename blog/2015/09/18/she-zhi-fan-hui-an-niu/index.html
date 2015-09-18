@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>类别：转载 - Marco的杂货铺</title>
+  <title>设置返回按钮 - Marco的杂货铺</title>
   <meta name="author" content="Marco Feng">
 
   
-  <meta name="description" content="Category: 转载">
+  <meta name="description" content="设置导航栏返回按钮的方法:
+导航栏的返回按钮backBarButtonItem需要设置在前一个页面，属于上一层的navigationItem。 e.g. ~~~ (void)setBackButtonTitle:(NSString *)title
+{ if (self. &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://marcofeng.com/blog/categories/zhuan-zai/">
+  <link rel="canonical" href="http://marcofeng.com/blog/2015/09/18/she-zhi-fan-hui-an-niu/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,79 +84,139 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">类别：转载</h1>
+    
+      <h1 class="entry-title">设置返回按钮</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-09-18T11:08:32+08:00" pubdate data-updated="true"></time>
+        
+        
+         | <a href="#comments">Comments</a>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>设置导航栏返回按钮的方法:
+导航栏的返回按钮backBarButtonItem需要设置在前一个页面，属于上一层的navigationItem。</p>
 
-  
-  <h2>2015</h2>
+<p>e.g.</p>
 
-<article>
-  
-<h1><a href="/blog/2015/09/11/zhao-pin-%5B%3F%5D-ge-kao-pu-de-ios/">[转] 招聘一个靠谱的 iOS</a></h1>
-<time datetime="2015-09-11T20:06:28+08:00" pubdate><span class='month'>Sep</span> <span class='day'>11</span> <span class='year'>2015</span></time>
+<p>~~~</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/zhuan-zai/'>转载</a></span>
-</footer>
+<ul>
+  <li>
+    <p>(void)setBackButtonTitle:(NSString *)title
+{
+  if (self.navigationController == nil || title.length == 0) {
+      return;
+  }</p>
 
+    <p>UIBarButtonItem *barButton = [[UIBarButtonItem alloc] init];
+  barButton.title = title;
+  UIColor *titleColor = [self _getButtonTextColor];
+  [barButton setTitleTextAttributes:@{NSForegroundColorAttributeName: titleColor} forState:UIControlStateNormal];
+  //设置字体颜色</p>
 
-</article>
+    <p>if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@”7.1”)) {
+      UIImage *backButtonImg = [[self _getBackImage] resizableImageWithCapInsets:UIEdgeInsetsMake(1.f, 7.f, 1.f, 1.f)];
+      [barButton setBackButtonBackgroundImage:backButtonImg forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+      //设置按钮背景图（“&lt;”），内间距
+  }</p>
 
+    <p>// backBarButtonItem需要设置在前一个页面！！！
+  NSArray *viewControllers = self.navigationController.viewControllers;
+  if (viewControllers.count &lt; 2) {
+      UIViewController *vc = viewControllers[0];
+      vc.navigationItem.backBarButtonItem = barButton;
+  } else {
+      UIViewController *vc = viewControllers[viewControllers.count-2];
+      vc.navigationItem.backBarButtonItem = barButton;
+  }
+}</p>
+  </li>
+</ul>
 
-
-<article>
-  
-<h1><a href="/blog/2015/09/11/sizethatfits-and-sizetofit/">[转] sizeThatFits and sizeToFit</a></h1>
-<time datetime="2015-09-11T17:36:30+08:00" pubdate><span class='month'>Sep</span> <span class='day'>11</span> <span class='year'>2015</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/zhuan-zai/'>转载</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2015/09/11/ioskai-fa-zhi-asyncsocketshi-yong-jiao-cheng/">[转] iOS开发之AsyncSocket使用教程</a></h1>
-<time datetime="2015-09-11T17:22:59+08:00" pubdate><span class='month'>Sep</span> <span class='day'>11</span> <span class='year'>2015</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/zhuan-zai/'>转载</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2015/09/11/shou-ji-hao-ma-he-jie-ge-jin-e-you-xiao-xing-pan-duan/">[转] 手机号码和价格金额有效性判断</a></h1>
-<time datetime="2015-09-11T16:29:32+08:00" pubdate><span class='month'>Sep</span> <span class='day'>11</span> <span class='year'>2015</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/zhuan-zai/'>转载</a></span>
-</footer>
-
-
-</article>
-
+<p>~~~</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Marco Feng</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-09-18T11:08:32+08:00" pubdate data-updated="true"></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2015/09/11/zhao-pin-%5B%3F%5D-ge-kao-pu-de-ios/" title="Previous Post: [转] 招聘一个靠谱的 iOS">&laquo; [转] 招聘一个靠谱的 iOS</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
+
+  <section>
+    <h1>Comments</h1>
+    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread" data-title="设置返回按钮"></div>
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"marcofeng"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = 'http://static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script>
+<!-- Duoshuo Comment END --></div>
+  </section>
 
 </div>
 
