@@ -9,9 +9,10 @@ categories: iOS 原创
 设置导航栏返回按钮的方法:
 导航栏的返回按钮backBarButtonItem需要设置在前一个页面，属于上一层的navigationItem。
 
+<!--more-->
  e.g.
 
- ~~~
+~~~
 
 - (void)setBackButtonTitle:(NSString *)title
 {
@@ -42,4 +43,4 @@ categories: iOS 原创
     }
 }
 
- ~~~
+~~~
