@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>[转] sizeThatFits and sizeToFit - Marco的杂货铺</title>
+  <title>类别：原创 - Marco的杂货铺</title>
   <meta name="author" content="Marco Feng">
 
   
-  <meta name="description" content="sizeThatFits and sizeToFit是UIView的两个方法, 官方文档上说： - (CGSize)sizeThatFits:(CGSize)size; 作用：return ‘best’ size to fit given size. does not actually &hellip;">
+  <meta name="description" content="Category: 原创">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://marcofeng.com/blog/2015/09/11/sizethatfits-and-sizetofit/">
+  <link rel="canonical" href="http://marcofeng.com/blog/categories/yuan-chuang/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
    <link href="/stylesheets/data-table.css" media="screen, projection" rel="stylesheet" type="text/css" />
@@ -82,147 +82,37 @@
   <div id="main">
     <div id="content">
       <div>
-<article class="hentry" role="article">
+<article role="article">
   
   <header>
-    
-      <h1 class="entry-title">[转] sizeThatFits and sizeToFit</h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2015-09-11T17:36:30+08:00" pubdate data-updated="true"></time>
-        
-        
-         | <a href="#comments">Comments</a>
-        
-      </p>
+    <h1 class="entry-title">类别：原创</h1>
     
   </header>
-
-
-<div class="entry-content"><p>sizeThatFits and sizeToFit是UIView的两个方法, 官方文档上说：</p>
-
-<pre><code>- (CGSize)sizeThatFits:(CGSize)size;
-</code></pre>
-
-<p>作用：return ‘best’ size to fit given size. does not actually resize view. Default is return existing view size</p>
-
-<pre><code>- (void)sizeToFit;
-</code></pre>
-
-<p>作用： calls sizeThatFits: with current view bounds and changes bounds size.</p>
-
-<!--more-->
-<p>example:</p>
-
-<pre><code>- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(100, 100, 200, 100)];
-    view.backgroundColor = [UIColor yellowColor];
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 0, 0)];
-    [label setFont:[UIFont systemFontOfSize:20]];
-    label.text = @"hello wdszgrf";
-    CGSize sizeThatFits = [label sizeThatFits:CGSizeZero];
-    NSLog(@"---- %f  %f ----", sizeThatFits.width, sizeThatFits.height);   
-    // output:  ---- 117.000000  24.000000 ----
-
-    NSLog(@"**** %f  %f ****", label.frame.size.width, label.frame.size.height);   
-    // output:  **** 0.000000  0.000000 **** 说明sizeThatSize并没有改变原始label的大小
- 
-    [label sizeToFit];  // 这样搞就直接改变了这个label的宽和高，使它根据上面字符串的大小做合适的改变
-    [label setCenter:CGPointMake(80, 50)];
-    NSLog(@"==== %f %f ====", label.frame.size.width, label.frame.size.height);  	
-    // output:   ==== 117.000000 24.000000 ==== 
-
-    [view addSubview:label];
-    [self.view addSubview:view];
-}
-</code></pre>
-
-<p>原文地址：http://liuxing8807.blog.163.com/blog/static/9703530520134381526554/</p>
-</div>
-
-
-  <footer>
-    <p class="meta">
-      
   
-
-<span class="byline author vcard">Posted by <span class="fn">Marco Feng</span></span>
-
-      
-
-
-
-
-
+  <div id="blog-archives" class="category">
 
 
 
   
+  <h2>2015</h2>
 
-
-<time datetime="2015-09-11T17:36:30+08:00" pubdate data-updated="true"></time>
-      
-
-<span class="categories">
+<article>
   
-    <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/zhuan-zai/'>转载</a>
-  
-</span>
+<h1><a href="/blog/2015/09/18/she-zhi-fan-hui-an-niu/">设置返回按钮</a></h1>
+<time datetime="2015-09-18T11:08:32+08:00" pubdate><span class='month'>Sep</span> <span class='day'>18</span> <span class='year'>2015</span></time>
+
+<footer>
+  <span class="categories">posted in <a class='category' href='/blog/categories/ios/'>ios</a>, <a class='category' href='/blog/categories/yuan-chuang/'>原创</a></span>
+</footer>
 
 
-    </p>
-    
-      <div class="sharing">
-  
-  
-  
-</div>
-
-    
-    <p class="meta">
-      
-        <a class="basic-alignment left" href="/blog/2015/09/11/ioskai-fa-zhi-asyncsocketshi-yong-jiao-cheng/" title="Previous Post: [转] iOS开发之AsyncSocket使用教程">&laquo; [转] iOS开发之AsyncSocket使用教程</a>
-      
-      
-        <a class="basic-alignment right" href="/blog/2015/09/11/zhao-pin-%5B%3F%5D-ge-kao-pu-de-ios/" title="Next Post: [转] 招聘一个靠谱的 iOS">[转] 招聘一个靠谱的 iOS &raquo;</a>
-      
-    </p>
-  </footer>
 </article>
 
+</div>
 
-  <section>
-    <h1>Comments</h1>
-    <div id="comments" aria-live="polite"><!-- Duoshuo Comment BEGIN -->
-<div class="ds-thread" data-title="[转] sizeThatFits and sizeToFit"></div>
-<script type="text/javascript">
-  var duoshuoQuery = {short_name:"marcofeng"};
-  (function() {
-    var ds = document.createElement('script');
-    ds.type = 'text/javascript';ds.async = true;
-    ds.src = 'http://static.duoshuo.com/embed.js';
-    ds.charset = 'UTF-8';
-    (document.getElementsByTagName('head')[0] 
-    || document.getElementsByTagName('body')[0]).appendChild(ds);
-  })();
-</script>
-<!-- Duoshuo Comment END --></div>
-  </section>
+  
+</article>
+
 
 </div>
 

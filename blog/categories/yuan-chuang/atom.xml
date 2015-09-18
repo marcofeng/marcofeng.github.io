@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[类别：原创 | Marco的杂货铺]]></title>
+  <link href="http://marcofeng.com/blog/categories/yuan-chuang/atom.xml" rel="self"/>
+  <link href="http://marcofeng.com/"/>
+  <updated>2015-09-18T11:18:41+08:00</updated>
+  <id>http://marcofeng.com/</id>
+  <author>
+    <name><![CDATA[Marco Feng]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[设置返回按钮]]></title>
+    <link href="http://marcofeng.com/blog/2015/09/18/she-zhi-fan-hui-an-niu/"/>
+    <updated>2015-09-18T11:08:32+08:00</updated>
+    <id>http://marcofeng.com/blog/2015/09/18/she-zhi-fan-hui-an-niu</id>
+    <content type="html"><![CDATA[<p>设置导航栏返回按钮的方法:
+导航栏的返回按钮backBarButtonItem需要设置在前一个页面，属于上一层的navigationItem。</p>
+
+<p>e.g.</p>
+
+<p>~~~</p>
+
+<ul>
+  <li>
+    <p>(void)setBackButtonTitle:(NSString *)title
+{
+  if (self.navigationController == nil || title.length == 0) {
+      return;
+  }</p>
+
+    <p>UIBarButtonItem *barButton = [[UIBarButtonItem alloc] init];
+  barButton.title = title;
+  UIColor *titleColor = [self _getButtonTextColor];
+  [barButton setTitleTextAttributes:@{NSForegroundColorAttributeName: titleColor} forState:UIControlStateNormal];
+  //设置字体颜色</p>
+
+    <p>if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@”7.1”)) {
+      UIImage *backButtonImg = [[self _getBackImage] resizableImageWithCapInsets:UIEdgeInsetsMake(1.f, 7.f, 1.f, 1.f)];
+      [barButton setBackButtonBackgroundImage:backButtonImg forState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+      //设置按钮背景图（“&lt;”），内间距
+  }</p>
+
+    <p>// backBarButtonItem需要设置在前一个页面！！！
+  NSArray *viewControllers = self.navigationController.viewControllers;
+  if (viewControllers.count &lt; 2) {
+      UIViewController *vc = viewControllers[0];
+      vc.navigationItem.backBarButtonItem = barButton;
+  } else {
+      UIViewController *vc = viewControllers[viewControllers.count-2];
+      vc.navigationItem.backBarButtonItem = barButton;
+  }
+}</p>
+  </li>
+</ul>
+
+<p>~~~</p>
+]]></content>
+  </entry>
+  
+</feed>
